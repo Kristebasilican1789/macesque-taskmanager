@@ -4,7 +4,7 @@ A macOS-flavored task manager applet for KDE Plasma, based on the upstream
 Plasma Task Manager. Minimized (or otherwise eligible) windows are rendered
 as live-captured window thumbnails right inside the task bar, dock-style.
 
-![screenshot](screenshots/screenshot.png)
+![Macesque Taskbar demo](https://github.com/snpynk/macesque-taskmanager/releases/download/v0.9.0/demo.gif)
 
 ## Features
 
@@ -29,30 +29,20 @@ as live-captured window thumbnails right inside the task bar, dock-style.
 - Wayland session for window thumbnails (PipeWire screen casting); on X11 the
   applet falls back to plain icons
 
-## Build
+## Build & install
 
 ```sh
-cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
-cmake --build build
+mkdir build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+make -j$(nproc)
+sudo make install
 ```
 
 For a Plasma development environment, point `CMAKE_INSTALL_PREFIX` at your
-kde prefix instead.
+development prefix instead.
 
-## Install
-
-```sh
-sudo cmake --install build     # system prefix
-# or, without sudo for a user prefix:
-cmake --install build --prefix ~/.local
-```
-
-Then restart the shell and add the widget ("Macesque Taskbar") from the panel
-edit mode:
-
-```sh
-systemctl restart --user plasma-plasmashell.service
-```
+Then restart plasmashell (e.g. from KRunner: `plasmashell --replace`) and add
+the widget ("Macesque Taskbar") to your panel from the edit mode.
 
 ## Notes
 
