@@ -13,8 +13,9 @@ as live-captured window thumbnails right inside the task bar, dock-style.
   into a corner.
 - **Thumbnail visibility modes** — show thumbnails for minimized windows only,
   all windows, unfocused windows, or windows on other virtual desktops.
-- **Icon alignment** — left, centered or right within each task button
-  (top/middle/bottom on vertical panels).
+- **Icon alignment** — choose where the small app icon sits next to a
+  thumbnail: left/center/right and top/middle/bottom. Plain task icons stay
+  centered like upstream.
 - **Optional: hide minimized tasks** — keep the bar free of minimized windows
   entirely; windows demanding attention still appear.
 - All the usual task manager behavior: grouping with popup lists, launchers,

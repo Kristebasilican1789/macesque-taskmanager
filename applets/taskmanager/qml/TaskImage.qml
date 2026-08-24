@@ -93,15 +93,12 @@ Item {
     readonly property real iconAreaHeight: compactLayout ? compactSide
         : vertical ? Math.min(contentWidth, contentHeight)
         : contentHeight
-    // The horizontal alignment always drives the X axis and the vertical
-    // alignment the Y axis, regardless of panel orientation.
+    // Plain icons are ALWAYS centered in the task button, exactly like the
+    // upstream task manager, independent of button width. The alignment
+    // options only place the mini icon shown next to a thumbnail.
     readonly property real iconAreaX: compactLayout ? frameMarginLeft
-        : iconAlignment === 0 ? frameMarginLeft
-        : iconAlignment === 2 ? width - fittedMarginRight - iconAreaWidth
         : (width - iconAreaWidth) / 2
     readonly property real iconAreaY: compactLayout ? frameMarginTop
-        : iconVerticalAlignment === 0 ? frameMarginTop
-        : iconVerticalAlignment === 2 ? height - fittedMarginBottom - iconAreaHeight
         : (height - iconAreaHeight) / 2
 
     // Position of the mini icon shown next to a thumbnail. Both alignments
