@@ -576,6 +576,7 @@ PlasmaCore.ToolTipArea {
             isHovered: frame.isHovered
             drawThumbnail: task.showThumbnail
             iconAlignment: Plasmoid.configuration.iconAlignment
+            iconVerticalAlignment: Plasmoid.configuration.iconVerticalAlignment
 
             compactLayout: task.inPopup
             parentMinimumWidth: task.parent?.minimumWidth ?? 0

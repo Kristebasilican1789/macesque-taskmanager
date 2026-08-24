@@ -43,8 +43,10 @@ Item {
 
     // Compact (group popup row) layout instead of a full task button.
     property bool compactLayout: false
-    // 0 = left/top, 1 = centered, 2 = right/bottom (main.xml iconAlignment)
+    // Horizontal axis: 0 = left, 1 = centered, 2 = right (main.xml)
     property int iconAlignment: 1
+    // Vertical axis: 0 = top, 1 = middle, 2 = bottom (main.xml)
+    property int iconVerticalAlignment: 1
     // task.parent?.minimumWidth, needed to reproduce the upstream icon width.
     property real parentMinimumWidth: 0
     // FrameSvg "widgets/tasks" margins, matching the ones KWin effects read.
@@ -68,29 +70,31 @@ Item {
         : vertical ? width - frameMarginLeft - frameMarginRight
         : Math.min(parentMinimumWidth, height) - frameMarginLeft - frameMarginRight
     readonly property real iconAreaHeight: compactLayout ? compactSide
+        : vertical ? width - frameMarginTop - frameMarginBottom
         : height - frameMarginTop - frameMarginBottom
+    // The horizontal alignment always drives the X axis and the vertical
+    // alignment the Y axis, regardless of panel orientation.
     readonly property real iconAreaX: compactLayout ? frameMarginLeft
-        : vertical ? frameMarginLeft
         : iconAlignment === 0 ? frameMarginLeft
         : iconAlignment === 2 ? width - frameMarginRight - iconAreaWidth
         : (width - iconAreaWidth) / 2
     readonly property real iconAreaY: compactLayout ? frameMarginTop
-        : vertical ? (iconAlignment === 0 ? frameMarginTop
-            : iconAlignment === 2 ? height - frameMarginBottom - iconAreaHeight
-            : (height - iconAreaHeight) / 2)
-        : frameMarginTop
+        : iconVerticalAlignment === 0 ? frameMarginTop
+        : iconVerticalAlignment === 2 ? height - frameMarginBottom - iconAreaHeight
+        : (height - iconAreaHeight) / 2
 
-    // Corner position of the mini icon shown next to a thumbnail; follows
-    // the configured alignment (physical, not mirrored), inset from the
-    // button edges so it does not sit on the frame border.
+    // Corner position of the mini icon shown next to a thumbnail. It rides
+    // the far edge of the long axis (bottom on horizontal panels, right on
+    // vertical ones) and slides along the other axis with the respective
+    // alignment, inset so it never touches the frame border.
     readonly property real miniIconInset: Kirigami.Units.smallSpacing
     readonly property real miniIconX: vertical ? width - Kirigami.Units.gridUnit - miniIconInset
         : iconAlignment === 0 ? miniIconInset
         : iconAlignment === 2 ? width - Kirigami.Units.gridUnit - miniIconInset
         : (width - Kirigami.Units.gridUnit) / 2
     readonly property real miniIconY: !vertical ? height - Kirigami.Units.gridUnit - miniIconInset
-        : iconAlignment === 0 ? miniIconInset
-        : iconAlignment === 2 ? height - Kirigami.Units.gridUnit - miniIconInset
+        : iconVerticalAlignment === 0 ? miniIconInset
+        : iconVerticalAlignment === 2 ? height - Kirigami.Units.gridUnit - miniIconInset
         : (height - Kirigami.Units.gridUnit) / 2
 
     // --- thumbnail geometry: published button rect inset by frame margins ---

@@ -22,6 +22,7 @@ KCMUtils.SimpleKCM {
     property alias cfg_showToolTips: showToolTips.checked
     property alias cfg_thumbnailMode: thumbnailMode.currentIndex
     property alias cfg_iconAlignment: iconAlignment.currentIndex
+    property alias cfg_iconVerticalAlignment: iconVerticalAlignment.currentIndex
     property alias cfg_highlightWindows: highlightWindows.checked
     property bool cfg_indicateAudioStreams
     property bool cfg_interactiveMute
@@ -78,6 +79,21 @@ KCMUtils.SimpleKCM {
                 i18nc("@item:inlistbox alignment of the icon inside the task button", "Left"),
                 i18nc("@item:inlistbox alignment of the icon inside the task button", "Center"),
                 i18nc("@item:inlistbox alignment of the icon inside the task button", "Right")
+            ]
+
+            Accessible.name: currentText
+        }
+
+        QQC2.ComboBox {
+            id: iconVerticalAlignment
+            Kirigami.FormData.label: i18nc("@label:listbox", "Icon alignment on vertical panels:")
+            Layout.fillWidth: true
+            Layout.minimumWidth: Kirigami.Units.gridUnit * 14
+
+            model: [
+                i18nc("@item:inlistbox vertical alignment of the icon inside the task button", "Top"),
+                i18nc("@item:inlistbox vertical alignment of the icon inside the task button", "Middle"),
+                i18nc("@item:inlistbox vertical alignment of the icon inside the task button", "Bottom")
             ]
 
             Accessible.name: currentText

@@ -72,7 +72,11 @@
       <default>0</default>
     </entry>
     <entry name="iconAlignment" type="Enum">
-      <label>Alignment of the icon inside the task button: 0 = left, 1 = centered, 2 = right.</label>
+      <label>Horizontal alignment of the icon inside the task button: 0 = left, 1 = centered, 2 = right.</label>
+      <default>1</default>
+    </entry>
+    <entry name="iconVerticalAlignment" type="Enum">
+      <label>Vertical alignment of the icon inside the task button: 0 = top, 1 = middle, 2 = bottom.</label>
       <default>1</default>
     </entry>
     <entry name="showToolTips" type="Bool">
