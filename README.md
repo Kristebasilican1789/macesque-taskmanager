@@ -68,6 +68,27 @@ frame margins (`TaskImage.qml` exposes the matching `thumbInsetFactor`).
 `applets/taskmanager/kcms/recentFiles/` is vendored from plasma-desktop; it
 provides the KConfigXT settings used by the Recent Documents context menu.
 
+### Staying in sync with upstream
+
+This repository carries a squashed history, so upstream plasma-desktop
+cannot be merged — **cherry-pick only**:
+
+```sh
+git fetch upstream
+# What's new in the task manager since the last sync:
+git log upstream-sync..upstream/master --oneline -- applets/taskmanager
+# Take what you need:
+git cherry-pick <commit>
+# Then move the marker:
+git tag -f upstream-sync upstream/master
+```
+
+The local `upstream-sync` tag marks the upstream revision already reviewed;
+it is never pushed. Expect trivial conflicts on lines carrying this applet's
+plugin id (`macesque.taskmanager`) and on locally rewritten files such as
+`TaskImage.qml`. Never run `git merge upstream/master` — the histories are
+unrelated and it would pull in the whole plasma-desktop tree.
+
 ### Translations
 
 Translation infrastructure is stubbed (`Messages.sh`); the pot domain is
