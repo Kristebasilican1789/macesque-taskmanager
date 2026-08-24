@@ -63,39 +63,62 @@ Item {
 
     property bool isCaptured: false
 
+    // --- frame-margin fitting ---
+    // Margins shrink proportionally when a button becomes too small to fit
+    // them (mirroring upstream's adjustMargin), and every derived rect is
+    // clamped, so squeezed tasks can never render outside their frame.
+    function fittedMargin(available: real, margin: real): real {
+        if (available <= 0 || margin <= 0) {
+            return 0;
+        }
+        if (available - margin >= Kirigami.Units.iconSizes.small) {
+            return margin;
+        }
+        return Math.max(0, Math.ceil((margin * (Kirigami.Units.iconSizes.small / available)) / 2));
+    }
+
+    readonly property real fittedMarginLeft: fittedMargin(width, frameMarginLeft)
+    readonly property real fittedMarginRight: fittedMargin(width, frameMarginRight)
+    readonly property real fittedMarginTop: fittedMargin(height, frameMarginTop)
+    readonly property real fittedMarginBottom: fittedMargin(height, frameMarginBottom)
+    readonly property real contentWidth: Math.max(0, width - fittedMarginLeft - fittedMarginRight)
+    readonly property real contentHeight: Math.max(0, height - fittedMarginTop - fittedMarginBottom)
+
     // --- plain-icon geometry (upstream icon-box equivalent) ---
     readonly property real compactSide: Math.max(Kirigami.Units.iconSizes.sizeForLabels, Kirigami.Units.iconSizes.medium)
 
     readonly property real iconAreaWidth: compactLayout ? compactSide
-        : vertical ? width - frameMarginLeft - frameMarginRight
-        : Math.min(parentMinimumWidth, height) - frameMarginLeft - frameMarginRight
+        : vertical ? contentWidth
+        : Math.max(0, Math.min(parentMinimumWidth, height) - fittedMarginLeft - fittedMarginRight)
     readonly property real iconAreaHeight: compactLayout ? compactSide
-        : vertical ? width - frameMarginTop - frameMarginBottom
-        : height - frameMarginTop - frameMarginBottom
+        : vertical ? Math.min(contentWidth, contentHeight)
+        : contentHeight
     // The horizontal alignment always drives the X axis and the vertical
     // alignment the Y axis, regardless of panel orientation.
     readonly property real iconAreaX: compactLayout ? frameMarginLeft
         : iconAlignment === 0 ? frameMarginLeft
-        : iconAlignment === 2 ? width - frameMarginRight - iconAreaWidth
+        : iconAlignment === 2 ? width - fittedMarginRight - iconAreaWidth
         : (width - iconAreaWidth) / 2
     readonly property real iconAreaY: compactLayout ? frameMarginTop
         : iconVerticalAlignment === 0 ? frameMarginTop
-        : iconVerticalAlignment === 2 ? height - frameMarginBottom - iconAreaHeight
+        : iconVerticalAlignment === 2 ? height - fittedMarginBottom - iconAreaHeight
         : (height - iconAreaHeight) / 2
 
-    // Corner position of the mini icon shown next to a thumbnail. It rides
-    // the far edge of the long axis (bottom on horizontal panels, right on
-    // vertical ones) and slides along the other axis with the respective
-    // alignment, inset so it never touches the frame border.
+    // Position of the mini icon shown next to a thumbnail. Both alignments
+    // apply relative to the task area on every orientation: the horizontal
+    // one places it left/center/right, the vertical one top/middle/bottom.
+    // It shrinks with the button instead of overflowing it.
     readonly property real miniIconInset: Kirigami.Units.smallSpacing
-    readonly property real miniIconX: vertical ? width - Kirigami.Units.gridUnit - miniIconInset
-        : iconAlignment === 0 ? miniIconInset
-        : iconAlignment === 2 ? width - Kirigami.Units.gridUnit - miniIconInset
-        : (width - Kirigami.Units.gridUnit) / 2
-    readonly property real miniIconY: !vertical ? height - Kirigami.Units.gridUnit - miniIconInset
-        : iconVerticalAlignment === 0 ? miniIconInset
-        : iconVerticalAlignment === 2 ? height - Kirigami.Units.gridUnit - miniIconInset
-        : (height - Kirigami.Units.gridUnit) / 2
+    readonly property real miniIconSize: Math.max(0,
+        Math.min(Kirigami.Units.gridUnit,
+                 thumbWidth - 2 * miniIconInset,
+                 thumbHeight - 2 * miniIconInset))
+    readonly property real miniIconX: iconAlignment === 0 ? miniIconInset
+        : iconAlignment === 2 ? width - miniIconSize - miniIconInset
+        : (width - miniIconSize) / 2
+    readonly property real miniIconY: iconVerticalAlignment === 0 ? miniIconInset
+        : iconVerticalAlignment === 2 ? height - miniIconSize - miniIconInset
+        : (height - miniIconSize) / 2
 
     // --- thumbnail geometry: published button rect inset by frame margins ---
     // Mirrors YetAnotherMagicLampEffect::iconMargins exactly: it builds
@@ -103,12 +126,12 @@ Item {
     // used for all four sides. insetFactor pairs with that effect's margin
     // multiplier (1.0 = legacy sizing inside the content area).
     readonly property real thumbInsetFactor: 1
-    readonly property real thumbX: compactLayout ? frameMarginLeft : frameMarginLeft * thumbInsetFactor
-    readonly property real thumbY: compactLayout ? frameMarginTop : frameMarginTop * thumbInsetFactor
+    readonly property real thumbX: compactLayout ? frameMarginLeft : fittedMarginLeft * thumbInsetFactor
+    readonly property real thumbY: compactLayout ? frameMarginTop : fittedMarginTop * thumbInsetFactor
     readonly property real thumbWidth: compactLayout ? compactSide
-        : width - 2 * frameMarginLeft * thumbInsetFactor
+        : Math.max(0, width - 2 * fittedMarginLeft * thumbInsetFactor)
     readonly property real thumbHeight: compactLayout ? compactSide
-        : height - 2 * frameMarginTop * thumbInsetFactor
+        : Math.max(0, height - 2 * fittedMarginTop * thumbInsetFactor)
 
     function resetThumbnail(redraw = true) {
         isCaptured = false
@@ -160,8 +183,8 @@ Item {
                 PropertyChanges {
                     iconContainer.x: taskThumbnailSourceItem.miniIconX
                     iconContainer.y: taskThumbnailSourceItem.miniIconY
-                    iconContainer.width: Kirigami.Units.gridUnit
-                    iconContainer.height: Kirigami.Units.gridUnit
+                    iconContainer.width: taskThumbnailSourceItem.miniIconSize
+                    iconContainer.height: taskThumbnailSourceItem.miniIconSize
                 }
             }
         ]
