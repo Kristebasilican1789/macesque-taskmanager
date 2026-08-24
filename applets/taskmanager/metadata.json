@@ -1,0 +1,21 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Kelvin Fonseca"
+            }
+        ],
+        "Category": "Windows and Tasks",
+        "Description": "Taskbar with macOS-style window thumbnails for minimized tasks",
+        "Icon": "preferences-system-windows",
+        "License": "GPL-2.0+",
+        "Name": "Macesque Taskbar"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-Provides": [
+        "org.kde.plasma.multitasking"
+    ],
+    "X-KDE-PluginInfo-Depends": [
+        "org.kde.graphicaleffects"
+    ]
+}
